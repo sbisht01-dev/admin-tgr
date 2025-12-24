@@ -1,0 +1,56 @@
+{
+  "catalog": {
+    "movies": {
+      "tgr_003": { "title": "Inception", "poster": "https://picsum.photos/seed/inception/200/300", "released": "2010-07-16" },
+      "tgr_004": { "title": "Interstellar", "poster": "https://picsum.photos/seed/interstellar/200/300", "released": "2014-11-07" },
+      "tgr_005": { "title": "The Dark Knight", "poster": "https://picsum.photos/seed/darkknight/200/300", "released": "2008-07-18" },
+      "tgr_006": { "title": "Dune", "poster": "https://picsum.photos/seed/dune/200/300", "released": "2021-10-22" },
+      "tgr_007": { "title": "Deadpool", "poster": "https://picsum.photos/seed/deadpool/200/300", "released": "2016-02-12" },
+      "tgr_008": { "title": "The Matrix", "poster": "https://picsum.photos/seed/matrix/200/300", "released": "1999-03-31" },
+      "tgr_009": { "title": "Avatar", "poster": "https://picsum.photos/seed/avatar/200/300", "released": "2009-12-18" },
+      "tgr_010": { "title": "Gladiator", "poster": "https://picsum.photos/seed/gladiator/200/300", "released": "2000-05-05" }
+    }
+  },
+  "ledger": {
+    "daily_collections": {
+      "tgr_003": { "day1": 21.8, "day2": 18.5, "day3": 15.2 },
+      "tgr_004": { "day1": 17.2, "day2": 19.1, "day3": 22.4 },
+      "tgr_005": { "day1": 47.1, "day2": 42.8, "day3": 38.5 },
+      "tgr_006": { "day1": 41.0, "day2": 33.2, "day3": 28.7 },
+      "tgr_007": { "day1": 12.5, "day2": 15.8, "day3": 14.2 },
+      "tgr_008": { "day1": 28.0, "day2": 26.5, "day3": 24.1 },
+      "tgr_009": { "day1": 77.0, "day2": 75.2, "day3": 68.9 },
+      "tgr_010": { "day1": 34.8, "day2": 31.2, "day3": 29.5 }
+    }
+  },
+  "search_index": {
+    "i": {
+      "tgr_003": { "t": "Inception", "p": "..." },
+      "tgr_004": { "t": "Interstellar", "p": "..." }
+    },
+    "in": {
+      "tgr_003": { "t": "Inception", "p": "..." },
+      "tgr_004": { "t": "Interstellar", "p": "..." }
+    },
+    "inc": { "tgr_003": { "t": "Inception", "p": "..." } },
+    "int": { "tgr_004": { "t": "Interstellar", "p": "..." } },
+    "d": {
+      "tgr_005": { "t": "The Dark Knight", "p": "..." },
+      "tgr_006": { "t": "Dune", "p": "..." },
+      "tgr_007": { "t": "Deadpool", "p": "..." }
+    },
+    "du": { "tgr_006": { "t": "Dune", "p": "..." } },
+    "de": { "tgr_007": { "t": "Deadpool", "p": "..." } },
+    "t": {
+      "tgr_005": { "t": "The Dark Knight", "p": "..." },
+      "tgr_008": { "t": "The Matrix", "p": "..." }
+    },
+    "th": {
+      "tgr_005": { "t": "The Dark Knight", "p": "..." },
+      "tgr_008": { "t": "The Matrix", "p": "..." }
+    },
+    "a": { "tgr_009": { "t": "Avatar", "p": "..." } },
+    "av": { "tgr_009": { "t": "Avatar", "p": "..." } },
+    "g": { "tgr_010": { "t": "Gladiator", "p": "..." } }
+  }
+}   
