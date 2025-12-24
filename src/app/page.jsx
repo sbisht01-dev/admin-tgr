@@ -1,47 +1,75 @@
-"use client"; // Required in Next.js App Router for hooks like useEffect
-
-import { db } from "@/lib/firebase"; // Use the 'db' you exported in your lib file
-import { ref, onValue, get } from "firebase/database";
+"use client";
+import "@/styles/home.css";
+import { db } from "@/lib/firebase";
+import { ref, get } from "firebase/database";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const dbRef = ref(db);
   const [movieList, setMovieList] = useState([]);
+  const [ledgerData, setLedgerData] = useState({}); // To store revenue data
+
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        get(ref(db, "/catalog/movies")).then((snapshot) => {
-          if (snapshot.exists()) {
-            setMovieList(Object.values(snapshot.val()));
-          } else {
-            console.log("No data available");
-          }
-        })
-      } catch (error) {
-        console.log(error);
+    const fetchData = async () => {
+      // 1. Fetch Movies
+      const movieSnap = await get(ref(db, "/catalog/movies"));
+
+      // 2. Fetch Ledger (All collections)
+      const ledgerSnap = await get(ref(db, "/ledger/daily_collections"));
+
+      if (movieSnap.exists()) {
+        // Convert to array and keep IDs this time!
+        const movies = Object.entries(movieSnap.val()).map(([id, data]) => ({
+          id,
+          ...data,
+        }));
+        setMovieList(movies);
       }
-    }
-    fetchMovies();
-  }, [])
-  console.log(movieList);
+
+      if (ledgerSnap.exists()) {
+        setLedgerData(ledgerSnap.val());
+      }
+    };
+    fetchData();
+  }, []);
+
+  // 3. The "Sum" Helper Function
+  const calculateTotal = (movieId) => {
+    const collections = ledgerData[movieId];
+    if (!collections) return 0;
+
+    // Object.values gives us [20, 32.5]
+    // .reduce adds them up: 0 + 20 + 32.5 = 52.5
+    return Object.values(collections).reduce((sum, val) => sum + val, 0);
+  };
 
   return (
-    <main>
+    <main className="main-wrapper">
       <div className="container">
-        <div className="header">
-          {
-            movieList.map((movie) => (
-              <div className="data-container" key={movie.title}>
-                <div className="movie">
-                  <div>
-                    <p className="title" >{movie.title} </p>
-                    <div className="release-date" >{movie.released}</div>
+        <h1 className="header">Movie Ledger</h1>
+        <div className="list-wrapper">
+          {movieList.map((movie) => (
+            <div className="horizontal-card" key={movie.id}>
+              <div className="poster-box"><span>Poster</span></div>
+              <div className="movie-details">
+                <div className="top-row">
+                  <h2 className="movie-title">{movie.title}</h2>
+                  {/* <span className="id-badge">{movie.id}</span> */}
+                </div>
+                <div className="meta-info">
+                  <div className="info-group">
+                    <label>Released</label>
+                    <p>{movie.released}</p>
+                  </div>
+                  <div className="info-group">
+                    <label>Total Collection</label>
+                    <p className="currency-text">
+                      ${Math.round(calculateTotal(movie.id))}
+                    </p>
                   </div>
                 </div>
               </div>
-            )
-            )
-          }
+            </div>
+          ))}
         </div>
       </div>
     </main>
