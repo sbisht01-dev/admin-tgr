@@ -2,7 +2,8 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getAnalytics, isSupported } from "firebase/analytics";
-
+import { getStorage } from "firebase/storage";
+// ... existing db code
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -19,6 +20,7 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 // Initialize Realtime Database
 const db = getDatabase(app);
+const storage = getStorage(app);
 
 // Analytics (only runs in the browser)
 let analytics;
@@ -28,4 +30,4 @@ if (typeof window !== "undefined") {
   });
 }
 
-export { app, db, analytics };
+export { app, db, analytics, storage };
